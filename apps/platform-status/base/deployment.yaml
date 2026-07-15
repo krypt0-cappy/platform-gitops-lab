@@ -19,10 +19,10 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.29-alpine
+          image: nginxinc/nginx-unprivileged:stable-alpine
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
 
           resources:
@@ -55,7 +55,8 @@ spec:
 
           volumeMounts:
             - name: website-content
-              mountPath: /usr/share/nginx/html
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
               readOnly: true
 
       volumes:

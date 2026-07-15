@@ -10,5 +10,4 @@ resources:
 labels:
   - pairs:
       managed-by: argocd
-    includeSelectors: true
     includeTemplates: true
