@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform-status
+  labels:
+    app.kubernetes.io/part-of: platform-lab
+    environment: local

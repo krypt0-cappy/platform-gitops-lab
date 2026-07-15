@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: platform-status
+  namespace: platform-status
+  labels:
+    app.kubernetes.io/name: platform-status
+    app.kubernetes.io/part-of: platform-lab
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: platform-status
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
