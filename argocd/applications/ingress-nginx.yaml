@@ -14,7 +14,7 @@ spec:
       values: |
         controller:
           service:
-            type: ClusterIP
+            type: LoadBalancer
 
           publishService:
             enabled: false
