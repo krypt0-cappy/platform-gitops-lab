@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/krypt0-cappy/platform-gitops-lab.git
     targetRevision: main
-    path: apps/platform-status/base
+    path: apps/platform-status/overlays/dev
 
   destination:
     server: https://kubernetes.default.svc
