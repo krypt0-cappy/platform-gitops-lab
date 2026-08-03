@@ -1,23 +1,33 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 
 metadata:
   name: platform-status
   namespace: argocd
 
 spec:
+  generators:
+    - list:
+        elements:
+          - environment: dev
+            namespace: platform-status
 
-  project: default
+  template:
+    metadata:
+      name: "platform-status-{{environment}}"
 
-  source:
-    repoURL: https://github.com/krypt0-cappy/platform-gitops-lab.git
-    targetRevision: main
-    path: apps/platform-status/overlays/dev
+    spec:
+      project: default
 
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: platform-status
+      source:
+        repoURL: https://github.com/krypt0-cappy/platform-status-lab.git
+        targetRevision: main
+        path: "apps/platform-status/overlays/{{environment}}"
 
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{namespace}}"
+
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
