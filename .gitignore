@@ -55,3 +55,12 @@ __pycache__/
 # Local environment files
 .env
 .env.*
+
+
+# Generated Atlas reports
+automation/python/output/*
+!automation/python/output/.gitkeep
+
+
+# Python packaging
+*.egg-info/
