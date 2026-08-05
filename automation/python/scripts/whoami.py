@@ -1,21 +1,45 @@
-import boto3
+import sys
+
+from botocore.exceptions import (
+    BotoCoreError,
+    ClientError,
+    NoCredentialsError,
+)
+
+from atlas.aws.identity import get_identity
+from atlas.aws.session import get_session
 
 
-def main():
+def main() -> None:
+    session = get_session()
+    profile = session.profile_name or "default"
+    region = session.region_name or "not configured"
 
-    sts = boto3.client("sts")
+    try:
+        identity = get_identity(session)
 
-    identity = sts.get_caller_identity()
+    except NoCredentialsError:
+        print(
+            f"ERROR: No AWS credentials found "
+            f"for profile '{profile}'."
+        )
+        sys.exit(1)
+
+    except (ClientError, BotoCoreError) as error:
+        print(f"ERROR: Unable to query AWS identity: {error}")
+        sys.exit(1)
 
     print()
-
-    print("AWS Identity")
-    print("------------------------")
+    print("Atlas AWS Identity")
+    print("------------------------------")
+    print(f"Profile : {profile}")
+    print(f"Region  : {region}")
     print(f"Account : {identity['Account']}")
-    print(f"User ARN: {identity['Arn']}")
+    print(f"ARN     : {identity['Arn']}")
     print(f"User ID : {identity['UserId']}")
+    print("------------------------------")
+    print()
 
 
 if __name__ == "__main__":
     main()
-
