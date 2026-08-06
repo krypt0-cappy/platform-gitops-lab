@@ -19,10 +19,7 @@ def main() -> None:
         identity = get_identity(session)
 
     except NoCredentialsError:
-        print(
-            f"ERROR: No AWS credentials found "
-            f"for profile '{profile}'."
-        )
+        print(f"ERROR: No AWS credentials found " f"for profile '{profile}'.")
         sys.exit(1)
 
     except (ClientError, BotoCoreError) as error:
