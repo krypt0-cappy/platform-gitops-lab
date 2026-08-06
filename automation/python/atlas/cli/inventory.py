@@ -90,7 +90,7 @@ def run_inventory(arguments: list[str]) -> None:
         print()
         print("Usage:")
         print("  atlas inventory ec2")
-        return
+        raise SystemExit(1)
 
     resource = arguments[0]
 
@@ -102,3 +102,4 @@ def run_inventory(arguments: list[str]) -> None:
     print()
     print("Supported resources:")
     print("  ec2")
+    raise SystemExit(1)
