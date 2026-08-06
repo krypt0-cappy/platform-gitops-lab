@@ -40,9 +40,9 @@ def collect_instances(
                             "name": get_name_tag(instance.get("Tags")),
                             "state": instance["State"]["Name"],
                             "instance_type": instance["InstanceType"],
-                            "availability_zone": instance[
-                                "Placement"
-                            ]["AvailabilityZone"],
+                            "availability_zone": instance["Placement"][
+                                "AvailabilityZone"
+                            ],
                             "private_ip": instance.get(
                                 "PrivateIpAddress",
                                 "",

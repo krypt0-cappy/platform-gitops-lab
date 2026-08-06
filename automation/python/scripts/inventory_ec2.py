@@ -13,7 +13,6 @@ from atlas.aws.regions import get_enabled_regions
 from atlas.aws.session import get_session
 from atlas.reporting.csv_report import write_csv
 
-
 FIELDNAMES = [
     "region",
     "instance_id",
@@ -72,11 +71,7 @@ def print_inventory(
 def main() -> None:
     session = get_session()
 
-    output_path = (
-        Path(__file__).resolve().parents[1]
-        / "output"
-        / "ec2_inventory.csv"
-    )
+    output_path = Path(__file__).resolve().parents[1] / "output" / "ec2_inventory.csv"
 
     try:
         regions = get_enabled_regions(session)

@@ -14,19 +14,14 @@ from atlas.aws.session import get_session
 def main() -> None:
     session = get_session()
     profile = session.profile_name or "default"
-    configured_region = (
-        session.region_name or "not configured"
-    )
+    configured_region = session.region_name or "not configured"
 
     try:
         identity = get_identity(session)
         regions = get_all_regions(session)
 
     except NoCredentialsError:
-        print(
-            f"ERROR: No credentials found "
-            f"for profile '{profile}'."
-        )
+        print(f"ERROR: No credentials found " f"for profile '{profile}'.")
         sys.exit(1)
 
     except (ClientError, BotoCoreError) as error:
